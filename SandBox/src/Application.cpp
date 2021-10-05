@@ -1,5 +1,5 @@
+#include <hzpch.h>
 #include "Hazel.h"
-
 class Sandbox :public Hazel::Application
 {
 public:
