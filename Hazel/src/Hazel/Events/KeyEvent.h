@@ -32,10 +32,10 @@ namespace Hazel {
 		int m_RepeatCount;
 	};
 
-	class KeyReleaseedEvent :public KeyEvent
+	class KeyReleasedEvent :public KeyEvent
 	{
 	public:
-		KeyReleaseedEvent(int keycode) :KeyEvent(keycode) {}
+		KeyReleasedEvent(int keycode) :KeyEvent(keycode) {}
 
 		std::string ToString()const override {
 			std::stringstream ss;

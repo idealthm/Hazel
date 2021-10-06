@@ -7,6 +7,8 @@ namespace Hazel
 {
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+	//区分引擎日志和应用日志.
+	//初始化其名字
 	void Log::Init() {
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		s_CoreLogger = spdlog::stdout_color_mt("HAZEL");

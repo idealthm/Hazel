@@ -1,21 +1,34 @@
 #pragma once
-#include"Core.h"
-#include"Events/Event.h"
+#include "Hazel/layerStack.h"
+#include "Core.h"
+#include "Events/Event.h"
 #include "Window.h"
 
+#include "Events/ApplicationEvent.h"
 
 namespace Hazel {
 	class HAZEL_API Application
 	{
 	public:
 		Application();
+		
 		virtual ~Application();
-		void run();
+		
+		void Run();
+
+		//void PushLayer(Layer* layer);
+		//void PushOverlay(Layer* overlay);
+		void  OnEvent(Event& e);
 	private:
+		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
 		bool m_Runing = true;
+		//LayerStack m_LayerStack;
 	};
 
-	// to be defined in client
+	// To be defined in client
+	//声明一个待实现的函数,外部应用继承实现Application之后,EntryPoint中调用该函数.
+	//做到只有一个由引擎控制main入口.
+	//控制程序的流程
 	Application* CreateApplication();
 }

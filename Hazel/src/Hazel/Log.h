@@ -17,7 +17,7 @@ namespace Hazel
 	};
 }
 
-#define HZ_CORE_TRACE(...)	::Hazel::Log::GetCoreLogger()->trac(__VA_ARGS__)
+#define HZ_CORE_TRACE(...)	::Hazel::Log::GetCoreLogger()->trace(__VA_ARGS__)
 #define HZ_CORE_INFO(...)	::Hazel::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define HZ_CORE_WARN(...)	::Hazel::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define HZ_CORE_ERROR(...)	::Hazel::Log::GetCoreLogger()->error(__VA_ARGS__)

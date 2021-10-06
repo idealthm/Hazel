@@ -4,6 +4,7 @@
 #include "Events/Event.h"
 
 namespace Hazel {
+	//窗口的属性 Title,Width,Height
 	struct WindowProps
 	{
 		std::string Title;
@@ -13,7 +14,9 @@ namespace Hazel {
 					unsigned int height = 720)
 			:Title(title),Width(width),Height(height){}
 	};
-
+	//创建一个窗口接口
+	//由Platform下的文件继承实现
+	//没有任何数据
 	class HAZEL_API Window
 	{
 	public:

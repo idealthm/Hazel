@@ -4,10 +4,10 @@
 
 
 namespace Hazel {
-	class HAZEL_API WindowsResizeEvent : public Event
+	class HAZEL_API WindowResizeEvent : public Event
 	{
 	public:
-		WindowsResizeEvent(unsigned int Width,unsigned int height)
+		WindowResizeEvent(unsigned int Width,unsigned int height)
 			: m_Width(Width),m_Height(height){}
 
 		inline unsigned int GetWidth()const { return m_Width; }
@@ -15,7 +15,7 @@ namespace Hazel {
 
 		std::string ToString()const override {
 			std::stringstream ss;
-			ss << "WindowsResizeEvent: " << m_Width << "," << m_Height;
+			ss << "WindowResizeEvent: " << m_Width << "," << m_Height;
 			return ss.str();
 		}
 		//加入宏定义函数.
@@ -26,10 +26,10 @@ namespace Hazel {
 		unsigned int m_Width, m_Height;
 	};
 
-	class HAZEL_API WindowsCloseEvent : public Event
+	class HAZEL_API WindowCloseEvent : public Event
 	{
 	public:
-		WindowsCloseEvent(){}
+		WindowCloseEvent(){}
 
 		EVENT_CLASS_TYPE(WindowClose)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
