@@ -10,7 +10,7 @@ namespace Hazel {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased,KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -46,7 +46,7 @@ namespace Hazel {
 			return GetCategoryFlags() & category;
 		}
 		//protected 派生类可使用
-	protected:
+	//protected:
 		bool m_Handled = false;
 	};
 
@@ -72,7 +72,7 @@ namespace Hazel {
 	private:
 		Event& m_Event;
 	};
-	//重载<<运算符
+	//重载<<运算符用于spdlog使用cout输出变量
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();

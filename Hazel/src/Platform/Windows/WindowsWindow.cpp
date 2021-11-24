@@ -5,6 +5,9 @@
 #include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"
 
+#include "glad/glad.h"
+//#include "GLFW/glfw3.h"
+
 namespace Hazel {
 	static bool s_GLFWInitialized = false;
 	static void GLFWErrorCallback(int error, const char* des)
@@ -51,6 +54,8 @@ namespace Hazel {
 		//
 		glfwMakeContextCurrent(m_Window);
 
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		HZ_CORE_ASSERT(status, "Failed to initialize Glad");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		SetVSync(true);
@@ -106,6 +111,12 @@ namespace Hazel {
 			}
 		});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window,unsigned int keycode)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
