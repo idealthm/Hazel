@@ -7,6 +7,7 @@
 
 #include "glad/glad.h"
 //#include "GLFW/glfw3.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Hazel {
 	static bool s_GLFWInitialized = false;
@@ -38,8 +39,8 @@ namespace Hazel {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		
 		HZ_CORE_INFO("Create windows {0},({1},{2})", props.Title, props.Width, props.Height);
+
 		if (!s_GLFWInitialized)
 		{
 			int success = glfwInit();
@@ -51,11 +52,10 @@ namespace Hazel {
 		}
 		//glfwCreateWindow创建了一个窗口，它可以指定窗口的类型以及尺寸。
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		//
-		glfwMakeContextCurrent(m_Window);
-
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		HZ_CORE_ASSERT(status, "Failed to initialize Glad");
+		
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+		//^
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		SetVSync(true);
@@ -172,7 +172,8 @@ namespace Hazel {
 			前缓冲保存着最终输出的图像，它会在屏幕上显示；而所有的的渲染指令都会在后缓冲上绘制。
 			当所有的渲染指令执行完毕后，我们交换(Swap)前缓冲和后缓冲，这样图像就立即呈显出来，之前提到的不真实感就消除了。
 		*/
-		glfwSwapBuffers(m_Window);
+		//glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 	
 	void WindowsWindow::SetVSync(bool enabled)

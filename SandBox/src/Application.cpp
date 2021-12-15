@@ -22,9 +22,6 @@ public:
 
 	void OnImGuiRender()
 	{
-		/*ImGui::Begin("Test");
-		ImGui::Text("Hello World");
-		ImGui::End();*/
 	}
 
 private:
@@ -40,7 +37,6 @@ public:
 		PushLayer(new ExampleLayer());
 	}
 	~Sandbox() {
-
 	}
 	//该应用的void run();函数才是真正的运行.
 	//定义在Application.cpp

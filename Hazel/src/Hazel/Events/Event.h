@@ -43,7 +43,7 @@ namespace Hazel {
 
 		inline bool IsCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & category;
+			return (GetCategoryFlags() & category ? 1 : 0);
 		}
 		//protected 派生类可使用
 	//protected:
