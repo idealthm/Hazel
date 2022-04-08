@@ -11,6 +11,10 @@
 #include "Renderer/VertexArray.h"
 #include "Renderer/Buffer.h"
 
+#include <Hazel/Renderer/OrthographicCamera.h>
+
+#include <Hazel/Core/Timestep.h>
+
 namespace Hazel {
 	class HAZEL_API Application
 	{
@@ -23,23 +27,20 @@ namespace Hazel {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
-		void  OnEvent(Event& e);
+		virtual void  OnEvent(Event& e);
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
-	private:
-		bool OnWindowClose(WindowCloseEvent& e);
-		std::unique_ptr<Window> m_Window;
-		ImGuiLayer* m_ImGuiLayer;
+	protected:
 		bool m_Runing = true;
+		bool OnWindowClose(WindowCloseEvent& e);
+	private:
+		std::unique_ptr<Window> m_Window;
+		//ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
 
 		static Application* s_Instance;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<VertexBuffer> m_VertexBuffer;
-		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 	};
 
 	// To be defined in client

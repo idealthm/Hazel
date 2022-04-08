@@ -1,7 +1,6 @@
 #pragma once
 
-#ifdef HZ_PLATFORM_WINDOWS
-
+#ifdef HZ_PLATFORM_WINDOWS 
 //声明一个函数,其定义在Haze/Application,实现在外部应用
 //先用于编译,连接后生效
 extern Hazel::Application* Hazel::CreateApplication();
@@ -15,5 +14,4 @@ int main(int argc, char** argv)
 	app->Run();
 	delete app;
 }
-
 #endif

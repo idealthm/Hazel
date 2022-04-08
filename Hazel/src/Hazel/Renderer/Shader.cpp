@@ -1,124 +1,67 @@
-#include "hzpch.h"
+#include <hzpch.h>
 #include "Shader.h"
 
+#include "Renderer.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
-#include<glad/glad.h>
+namespace Hazel
+{
 
-namespace Hazel {
-
-	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	Ref<Shader> Shader::Create(const std::string& path)
 	{
-		// Create an empty vertex shader handle
-		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-		// Send the vertex shader source code to GL
-		// Note that std::string's .c_str is NULL character terminated.
-		const GLchar* source = vertexSrc.c_str();
-		glShaderSource(vertexShader, 1, &source, 0);
-
-		// Compile the vertex shader
-		glCompileShader(vertexShader);
-
-		GLint isCompiled = 0;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
+		switch (Renderer::GetAPI())
 		{
-			GLint maxLength = 0;
-			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			std::vector<GLchar> infoLog(maxLength);
-			glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
-
-			// We don't need the shader anymore.
-			glDeleteShader(vertexShader);
-
-			// Use the infoLog as you see fit.
-			HZ_CORE_ERROR("{0}",infoLog.data());
-			HZ_CORE_ASSERT(false, "Vertex shader compilation failure!");
-			return;
+			case RendererAPI::API::None:		HZ_CORE_ASSERT(false, "Don't support the RendererAPI!")	return nullptr;
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(path);
 		}
+		HZ_CORE_ASSERT(false, "Unknow API!");
 
-		// Create an empty fragment shader handle
-		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+		return nullptr;
+	}
 
-		// Send the fragment shader source code to GL
-		// Note that std::string's .c_str is NULL character terminated.
-		source = fragmentSrc.c_str();
-		glShaderSource(fragmentShader, 1, &source, 0);
-
-		// Compile the fragment shader
-		glCompileShader(fragmentShader);
-
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
+	Ref<Shader> Shader::Create(const std::string& name,const std::string& vertexSrc, const std::string& fragmentSrc)
+	{
+		switch (Renderer::GetAPI())
 		{
-			GLint maxLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			std::vector<GLchar> infoLog(maxLength);
-			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-
-			// We don't need the shader anymore.
-			glDeleteShader(fragmentShader);
-			// Either of them. Don't leak shaders.
-			glDeleteShader(vertexShader);
-
-			HZ_CORE_ERROR("{0}", infoLog.data());
-			HZ_CORE_ASSERT(false, "Fragment shader compilation failure!");
-			return;
+			case RendererAPI::API::None:		HZ_CORE_ASSERT(false, "Don't support the RendererAPI!")	return nullptr;
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
-
-		// Vertex and fragment shaders are successfully compiled.
-		// Now time to link them together into a program.
-		// Get a program object.
-		GLuint program = glCreateProgram();
-		m_RendererID = program;
-		// Attach our shaders to our program
-		glAttachShader(program, vertexShader);
-		glAttachShader(program, fragmentShader);
-
-		// Link our program
-		glLinkProgram(program);
-
-		// Note the different functions here: glGetProgram* instead of glGetShader*.
-		GLint isLinked = 0;
-		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
-		if (isLinked == GL_FALSE)
-		{
-			GLint maxLength = 0;
-			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			std::vector<GLchar> infoLog(maxLength);
-			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-
-			// We don't need the program anymore.
-			glDeleteProgram(program);
-			// Don't leak shaders either.
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
-
-			HZ_CORE_ERROR("{0}", infoLog.data());
-			HZ_CORE_ASSERT(false, "Shader link failure!");
-			return;
-		}
-
-		// Always detach shaders after a successful link.
-		glDetachShader(program, vertexShader);
-		glDetachShader(program, fragmentShader);
+		HZ_CORE_ASSERT(false, "Unknow API!");
+		
+		return nullptr;
 	}
-	Shader::~Shader()
+	void ShaderLibrary::Add(const Ref<Shader> shader)
 	{
-		glDeleteProgram(m_RendererID);
+		auto& name = shader->GetName();
+		Add(name, shader);
 	}
-	void Shader::Bind() const
+
+	void ShaderLibrary::Add(const std::string& name, const Ref<Shader> shader)
 	{
-		glUseProgram(m_RendererID);
+		HZ_CORE_ASSERT(!Exists(name), "Shader already exist!");
+		m_Shaders[name] = shader;
 	}
-	void Shader::UnBind() const
+
+	Ref<Shader> ShaderLibrary::Load(const std::string& path)
 	{
-		glUseProgram(0);
+		auto& shader = Shader::Create(path);
+		Add(shader);
+		return shader;
+	}
+	Ref<Shader> ShaderLibrary::Load(const std::string& name, const std::string& path)
+	{
+		auto& shader = Shader::Create(path);
+		Add(name, shader);
+		return shader;
+	}
+	Ref<Shader> ShaderLibrary::Get(const std::string& name)
+	{
+		HZ_CORE_ASSERT(Exists(name), "Shader Not Exist!");
+		return m_Shaders[name];
+	}
+
+	bool ShaderLibrary::Exists(const std::string& name) const
+	{
+		return m_Shaders.find(name) != m_Shaders.end();
 	}
 }

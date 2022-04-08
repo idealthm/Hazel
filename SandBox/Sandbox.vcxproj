@@ -132,11 +132,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Example.cpp" />
+    <ClCompile Include="src\Planet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hazel\Hazel.vcxproj">
       <Project>{99294D0D-053E-75BE-CEBF-181E3A9371EF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\NewPlanet.glsl" />
+    <None Include="Assets\Shaders\Planet.glsl" />
+    <None Include="Assets\Shaders\SpaceBox.glsl" />
+    <None Include="Assets\Shaders\Texture.glsl" />
+    <None Include="Assets\Shaders\Triangle.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Example.h" />
+    <ClInclude Include="src\Planet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\openGL\openGL\Assets\textures\back.jpg" />
+    <Image Include="..\..\openGL\openGL\src\Assets\textures\Space1.jpg" />
+    <Image Include="Assets\Textures\back.jpg" />
+    <Image Include="Assets\Textures\Space1.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

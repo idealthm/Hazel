@@ -52,7 +52,7 @@ namespace Hazel {
 		}
 		//glfwCreateWindow创建了一个窗口，它可以指定窗口的类型以及尺寸。
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		
+		//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
 		//^
