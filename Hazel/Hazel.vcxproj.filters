@@ -1411,6 +1411,7 @@
     <ClInclude Include="src\Hazel\OrthographicCameraController.h" />
     <ClInclude Include="src\Hazel\PerspectiveCameraController.h" />
     <ClInclude Include="src\Hazel\Camera.h" />
+    <ClInclude Include="src\Hazel\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Application.cpp">
@@ -1488,5 +1489,6 @@
     <ClCompile Include="src\Hazel\Renderer\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Hazel\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Hazel\PerspectiveCameraController.cpp" />
+    <ClCompile Include="src\Hazel\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

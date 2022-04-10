@@ -10,7 +10,7 @@ ExampleLayer::ExampleLayer()
 // 初始化相机横纵比 aspect ratio.
 	:Layer("Example"), m_CameraController(16.0f / 9.0f,false)
 {
-	m_VertexArray.reset(Hazel::VertexArray::Create());
+	m_VertexArray=Hazel::VertexArray::Create();
 
 	float vertices[3 * 7] = {
 		-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f , 1.0f,
@@ -35,7 +35,7 @@ ExampleLayer::ExampleLayer()
 
 	// Texture 
 
-	m_TVArray.reset(Hazel::VertexArray::Create());
+	m_TVArray = Hazel::VertexArray::Create();
 	float texturevertices[5 * 4] = {
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,

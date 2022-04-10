@@ -61,7 +61,7 @@ PlanetLayer::PlanetLayer()
 		{Hazel::ShaderDataType::Float3, "a_Position"}
 	};
 	m_VertexBuffer->SetLayout(layout);
-	m_VertexArray.reset(Hazel::VertexArray::Create());
+	m_VertexArray = Hazel::VertexArray::Create();
 	m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 	std::vector<uint32_t> indicesEarth = GetSphereIndex(30, 30);
@@ -76,7 +76,7 @@ PlanetLayer::PlanetLayer()
 	};
 	BVB->SetLayout(Boxlayout);
 
-	m_BoxArray.reset(Hazel::VertexArray::Create());
+	m_BoxArray = Hazel::VertexArray::Create();
 	m_BoxArray->AddVertexBuffer(BVB);
 	
 	std::vector<uint32_t> BoxIndices;
@@ -91,7 +91,7 @@ PlanetLayer::PlanetLayer()
 	CVB.reset(Hazel::VertexBuffer::Create(verticesCircle.data(), sizeof(float) * verticesCircle.size()));
 	CVB->SetLayout(layout);
 
-	m_CAO.reset(Hazel::VertexArray::Create());
+	m_CAO=Hazel::VertexArray::Create();
 	m_CAO->AddVertexBuffer(CVB);
 
 	std::vector<uint32_t> CircleIndices;

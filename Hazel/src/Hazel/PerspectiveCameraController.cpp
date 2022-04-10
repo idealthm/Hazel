@@ -6,7 +6,7 @@
 namespace Hazel
 {
     PerspectiveCameraController::PerspectiveCameraController(float aspectratio)
-        : m_AspectRatio(aspectratio), m_Camera(m_AspectRatio, m_ZoomLevel)
+        : m_AspectRatio(aspectratio), m_Camera(aspectratio, m_ZoomLevel)
     {
     }
     void PerspectiveCameraController::OnUpdate(Timestep ts)

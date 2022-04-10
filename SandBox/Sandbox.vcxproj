@@ -134,6 +134,7 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Example.cpp" />
     <ClCompile Include="src\Planet.cpp" />
+    <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hazel\Hazel.vcxproj">
@@ -141,6 +142,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\FlatColor.glsl" />
     <None Include="Assets\Shaders\NewPlanet.glsl" />
     <None Include="Assets\Shaders\Planet.glsl" />
     <None Include="Assets\Shaders\SpaceBox.glsl" />
@@ -150,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="src\Example.h" />
     <ClInclude Include="src\Planet.h" />
+    <ClInclude Include="src\Sandbox2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\openGL\openGL\Assets\textures\back.jpg" />

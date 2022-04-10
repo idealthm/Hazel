@@ -151,7 +151,6 @@ namespace Hazel {
 		}
 		return shaderSources;
 	}
-
 	std::string OpenGLShader::ReadFile(const std::string& path)
 	{
 		std::string result;
@@ -168,6 +167,21 @@ namespace Hazel {
 			HZ_CORE_ERROR("Could not open file '{0}'", path);
 		}
 		return result;
+	}
+
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
+	{
+		UploadUniformFloat3(name, value);
+	}
+
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
+	{
+		UploadUniformFloat4(name, value);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
+	{
+		UploadUniformMat4(name, value);
 	}
 
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)

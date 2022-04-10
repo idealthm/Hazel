@@ -18,7 +18,5 @@ namespace Hazel {
 		virtual void RecalculateViewMatrix();
 	private:
 		float m_Rotation = 0.0f;
-
-		
 	};
 }

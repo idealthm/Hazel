@@ -66,8 +66,9 @@ namespace Hazel {
 	{
 		EventDispatcher dispatcher(e);
 		//初步完成检测到不同事件时的动作.
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
-
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowCloseEvent));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResizeEvent));
+		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(Application::OnKeyPressedEvent));
 		//HZ_CORE_TRACE("{0}", e);
 			
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
@@ -86,8 +87,11 @@ namespace Hazel {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			//除去一些事件以外,还需要一些图层,例如背景...
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate(timestep);
+			if ( !m_Minimized ) {
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate(timestep);
+			}
+			
 			//
 			/*m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
@@ -98,8 +102,29 @@ namespace Hazel {
 		}
 	}
 		
-	bool Application::OnWindowClose(WindowCloseEvent& e) {
+	bool Application::OnWindowCloseEvent(WindowCloseEvent& e) {
 		m_Runing = false;
 		return true;
+	}
+
+	bool Application::OnWindowResizeEvent(WindowResizeEvent& e) {
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+		m_Minimized = false;
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+		return true;
+	}
+
+	bool Application::OnKeyPressedEvent(KeyPressedEvent& e)
+	{
+		if (Input::IsKeyPressed(GLFW_KEY_ESCAPE)) 
+		{
+			m_Runing = false;
+			return true;
+		}
+		return false;
 	}
 }
