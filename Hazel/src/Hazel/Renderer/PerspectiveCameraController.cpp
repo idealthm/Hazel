@@ -11,6 +11,8 @@ namespace Hazel
     }
     void PerspectiveCameraController::OnUpdate(Timestep ts)
     {
+        HZ_PROFILE_FUNCTION();
+
         float velocity = m_MovementSpeed * ts;
 
         if (Input::IsKeyPressed(HZ_KEY_W))
@@ -30,19 +32,26 @@ namespace Hazel
     }
     void PerspectiveCameraController::OnEvent(Event& e)
     {
+        HZ_PROFILE_FUNCTION();
+
         EventDispatcher dispatch(e);
         dispatch.Dispatch<MouseScrolledEvent>(HZ_BIND_EVENT_FN(PerspectiveCameraController::OnMouseScrolled));
         dispatch.Dispatch<WindowResizeEvent>(HZ_BIND_EVENT_FN(PerspectiveCameraController::OnWindowResized));
         dispatch.Dispatch<MouseMovedEvent>(HZ_BIND_EVENT_FN(PerspectiveCameraController::OnMouseMoveEvent));
     }
 
-    void PerspectiveCameraController::SetPosition(glm::vec3 position) {
+    void PerspectiveCameraController::SetPosition(glm::vec3 position) 
+    {
+        HZ_PROFILE_FUNCTION();
+
         m_CameraPosition = position;
         m_Camera.SetPosition(position);
     }
 
     bool PerspectiveCameraController::OnMouseScrolled(MouseScrolledEvent& e)
     {
+        HZ_PROFILE_FUNCTION();
+
         m_ZoomLevel -= e.GetYOffset();
         if (m_ZoomLevel < 1.0f) m_ZoomLevel = 1.0f;
         if (m_ZoomLevel > 45.0f) m_ZoomLevel = 45.0f;
@@ -51,6 +60,8 @@ namespace Hazel
     }
     bool PerspectiveCameraController::OnWindowResized(WindowResizeEvent& e)
     {
+        HZ_PROFILE_FUNCTION();
+
         m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
         m_Camera.SetProjection(m_AspectRatio, m_ZoomLevel);
         return true;
@@ -58,6 +69,8 @@ namespace Hazel
 
     bool PerspectiveCameraController::OnMouseMoveEvent(MouseMovedEvent& e)
     {
+        HZ_PROFILE_FUNCTION();
+
         static float posx = (float)e.GetX(), posy = (float)e.GetY();
         float yaw = m_Camera.GetYaw() + (e.GetX() - posx) * m_MouseSensitivity;
         float pitch = m_Camera.GetPitch() - (e.GetY() - posy) * m_MouseSensitivity;

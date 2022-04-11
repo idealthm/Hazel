@@ -2,7 +2,7 @@
 #include "Example.h"
 #include "Planet.h"
 // -----Entry Point-----------------
-#include "Hazel/EntryPoint.h"
+#include "Hazel/Core/EntryPoint.h"
 // ---------------------------------"
 #include "Sandbox2D.h"
 class Sandbox :public Hazel::Application

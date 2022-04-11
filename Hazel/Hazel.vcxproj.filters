@@ -57,13 +57,13 @@
     <ClInclude Include="src\Hazel.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Application.h">
+    <ClInclude Include="src\Hazel\Core\Application.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Core.h">
+    <ClInclude Include="src\Hazel\Core\Core.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\EntryPoint.h">
+    <ClInclude Include="src\Hazel\Core\EntryPoint.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Events\ApplicationEvent.h">
@@ -81,22 +81,22 @@
     <ClInclude Include="src\Hazel\ImGui\ImGuiLayer.h">
       <Filter>src\Hazel\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Input.h">
+    <ClInclude Include="src\Hazel\Core\Input.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\KeyCodes.h">
+    <ClInclude Include="src\Hazel\Core\KeyCodes.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Layer.h">
+    <ClInclude Include="src\Hazel\Core\Layer.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\LayerStack.h">
+    <ClInclude Include="src\Hazel\Core\LayerStack.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Log.h">
+    <ClInclude Include="src\Hazel\Core\Log.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\MouseButtonCodes.h">
+    <ClInclude Include="src\Hazel\Core\MouseButtonCodes.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\Buffer.h">
@@ -126,10 +126,10 @@
     <ClInclude Include="src\Hazel\Renderer\VertexArray.h">
       <Filter>src\Hazel\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Window.h">
+    <ClInclude Include="src\Hazel\Core\Window.h">
       <Filter>src\Hazel</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\core\Timestep.h">
+    <ClInclude Include="src\Hazel\Core\Timestep.h">
       <Filter>src\Hazel\core</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
@@ -1408,13 +1408,14 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\PerspectiveCamera.h" />
-    <ClInclude Include="src\Hazel\OrthographicCameraController.h" />
-    <ClInclude Include="src\Hazel\PerspectiveCameraController.h" />
-    <ClInclude Include="src\Hazel\Camera.h" />
+    <ClInclude Include="src\Hazel\Renderer\OrthographicCameraController.h" />
+    <ClInclude Include="src\Hazel\Renderer\PerspectiveCameraController.h" />
+    <ClInclude Include="src\Hazel\Renderer\Camera.h" />
     <ClInclude Include="src\Hazel\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\Hazel\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Hazel\Application.cpp">
+    <ClCompile Include="src\Hazel\Core\Application.cpp">
       <Filter>src\Hazel</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\ImGui\ImGuiBuild.cpp">
@@ -1423,13 +1424,13 @@
     <ClCompile Include="src\Hazel\ImGui\ImGuiLayer.cpp">
       <Filter>src\Hazel\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hazel\Layer.cpp">
+    <ClCompile Include="src\Hazel\Core\Layer.cpp">
       <Filter>src\Hazel</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hazel\LayerStack.cpp">
+    <ClCompile Include="src\Hazel\Core\LayerStack.cpp">
       <Filter>src\Hazel</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hazel\Log.cpp">
+    <ClCompile Include="src\Hazel\Core\Log.cpp">
       <Filter>src\Hazel</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Renderer\Buffer.cpp">
@@ -1487,8 +1488,8 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Renderer\PerspectiveCamera.cpp" />
-    <ClCompile Include="src\Hazel\OrthographicCameraController.cpp" />
-    <ClCompile Include="src\Hazel\PerspectiveCameraController.cpp" />
+    <ClCompile Include="src\Hazel\Renderer\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Hazel\Renderer\PerspectiveCameraController.cpp" />
     <ClCompile Include="src\Hazel\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

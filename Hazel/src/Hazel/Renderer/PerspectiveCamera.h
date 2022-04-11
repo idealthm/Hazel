@@ -4,7 +4,8 @@
 #include "Hazel/Core/Timestep.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "Hazel/Camera.h"
+#include "Hazel/Renderer/Camera.h"
+
 typedef unsigned char GLboolean;
 namespace Hazel {
     class PerspectiveCamera : public Camera{

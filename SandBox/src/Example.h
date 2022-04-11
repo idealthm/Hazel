@@ -8,7 +8,7 @@ public:
 	ExampleLayer();
 	void OnUpdate(Hazel::Timestep ts) override;
 	void OnEvent(Hazel::Event& e) override;
-	void OnImGuiRender();
+	void OnImGuiRender() override;
 
 private:
 	Hazel::ShaderLibrary m_Shaders;

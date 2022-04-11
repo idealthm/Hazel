@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Renderer/OrthographicCamera.h"
-#include "Renderer/PerspectiveCamera.h"
+#include "Hazel/Renderer/OrthographicCamera.h"
+#include "Hazel/Renderer/PerspectiveCamera.h"
 #include "Hazel/core/Timestep.h"
 
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Events/MouseEvent.h"
-#include "Input.h"
-#include "KeyCodes.h"
+#include "Hazel/Core/Input.h"
+#include "Hazel/Core/KeyCodes.h"
 
 #include "Camera.h"
 

@@ -19,6 +19,8 @@ namespace Hazel {
 	}
 	void OpenGLRendererAPI::Init()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		glEnable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
 		//glEnable(GL_CULL_FACE);
@@ -47,5 +49,6 @@ namespace Hazel {
 	{
 		vertexArray->Bind();
 		glDrawElements(GetOpenGLType(type), vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

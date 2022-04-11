@@ -1,15 +1,15 @@
 #include "hzpch.h"
 
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
+#include "Hazel/Events/ApplicationEvent.h"
 
 //#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Input.h"
 
-#include "Renderer/Buffer.h"
-#include "Renderer/Shader.h"
+#include "Hazel/Renderer/Buffer.h"
+#include "Hazel/Renderer/Shader.h"
 
 #include <Hazel/Renderer/Renderer.h>
 
@@ -31,6 +31,9 @@ namespace Hazel {
 	//调用后生成该类的一个实例 
 	Application::Application() 
 	{
+		HZ_PROFILE_FUNCTION();
+
+
 		HZ_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -52,18 +55,24 @@ namespace Hazel {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		//初步完成检测到不同事件时的动作.
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowCloseEvent));
@@ -81,6 +90,8 @@ namespace Hazel {
 
 	void Application::Run()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		while (m_Runing)
 		{
 			float time = (float)glfwGetTime();
@@ -88,26 +99,37 @@ namespace Hazel {
 			m_LastFrameTime = time;
 			//除去一些事件以外,还需要一些图层,例如背景...
 			if ( !m_Minimized ) {
+				HZ_PROFILE_SCOPE("LayerStack OnUpdate");
+
 				for (Layer* layer : m_LayerStack)
 					layer->OnUpdate(timestep);
 			}
 			
 			//
-			/*m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();*/
+			/*
+				HZ_PROFILE_SCOPE("ImGuiLayerStack OnUpdate");
+				m_ImGuiLayer->Begin();
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();
+				m_ImGuiLayer->End();
+			*/
 
 			m_Window->OnUpdate();
 		}
 	}
 		
-	bool Application::OnWindowCloseEvent(WindowCloseEvent& e) {
+	bool Application::OnWindowCloseEvent(WindowCloseEvent& e) 
+	{
+		HZ_PROFILE_FUNCTION();
+
 		m_Runing = false;
 		return true;
 	}
 
-	bool Application::OnWindowResizeEvent(WindowResizeEvent& e) {
+	bool Application::OnWindowResizeEvent(WindowResizeEvent& e) 
+	{
+		HZ_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;
@@ -120,6 +142,8 @@ namespace Hazel {
 
 	bool Application::OnKeyPressedEvent(KeyPressedEvent& e)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		if (Input::IsKeyPressed(GLFW_KEY_ESCAPE)) 
 		{
 			m_Runing = false;

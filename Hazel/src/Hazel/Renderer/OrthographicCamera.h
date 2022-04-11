@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "Hazel/Camera.h"
+#include "Hazel/Renderer/Camera.h"
 namespace Hazel {
 
 	class OrthographicCamera : public Camera

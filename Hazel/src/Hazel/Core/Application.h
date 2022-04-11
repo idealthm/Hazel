@@ -1,15 +1,15 @@
 #pragma once
-#include "Hazel/layerStack.h"
-#include "Core.h"
-#include "Events/Event.h"
+#include "Hazel/Core/layerStack.h"
+#include "Hazel/Core/Core.h"
+#include "Hazel/Events/Event.h"
 #include "Window.h"
 
-#include "Events/ApplicationEvent.h"
+#include "Hazel/Events/ApplicationEvent.h"
 
 #include "Hazel/ImGui/ImGuiLayer.h"
-#include "Renderer/Shader.h"
-#include "Renderer/VertexArray.h"
-#include "Renderer/Buffer.h"
+#include "Hazel/Renderer/Shader.h"
+#include "Hazel/Renderer/VertexArray.h"
+#include "Hazel/Renderer/Buffer.h"
 
 #include <Hazel/Renderer/OrthographicCamera.h>
 

@@ -25,6 +25,8 @@ namespace Hazel {
 	//生成真正的窗口
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
@@ -35,6 +37,8 @@ namespace Hazel {
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -155,12 +159,16 @@ namespace Hazel {
 
 	void WindowsWindow::ShutDown()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		//glfwDestroyWindow销毁了一个窗口
 		glfwDestroyWindow(m_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		//执行一些事件
 		glfwPollEvents();
 		/*
@@ -178,6 +186,8 @@ namespace Hazel {
 	
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		glfwSwapInterval(enabled?1:0);
 		m_Data.VSync = enabled;
 	}

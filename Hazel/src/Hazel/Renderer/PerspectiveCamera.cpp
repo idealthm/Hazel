@@ -9,6 +9,8 @@ namespace Hazel{
     PerspectiveCamera::PerspectiveCamera(float aspectratio, float zoom)
         : m_Front(glm::vec3(0.0f, 0.0f, -1.0f))
     {
+        HZ_PROFILE_FUNCTION();
+
         m_WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
         m_Yaw = -90.0f;
         m_Pitch = 0.0f;
@@ -18,18 +20,24 @@ namespace Hazel{
 
     void PerspectiveCamera::SetProjection(float aspectratio, float zoom)
     {
+        HZ_PROFILE_FUNCTION();
+
         m_ProjectionMatrix = glm::perspective(glm::radians(zoom), aspectratio, 0.1f, 100.0f);
         m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
     }
 
     void PerspectiveCamera::SetPosition(const glm::vec3& postion)
     {
+        HZ_PROFILE_FUNCTION();
+
         m_Position = postion;
         m_ViewMatrix = glm::lookAt(m_Position, m_Position + m_Front, m_Up);
     }
 
     void PerspectiveCamera::RecalculateViewMatrix()
     {
+        HZ_PROFILE_FUNCTION();
+
         // calculate the new Front vector
         glm::vec3 front;
         front.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));

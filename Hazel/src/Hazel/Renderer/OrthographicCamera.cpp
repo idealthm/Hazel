@@ -10,6 +10,8 @@ namespace Hazel{
 		// near : -1.0f
 		// far : 1.0f
 	{
+		HZ_PROFILE_FUNCTION();
+
 		zoom = glm::radians(zoom);
 		m_ProjectionMatrix = glm::ortho(-aspectratio * zoom, aspectratio * zoom, -zoom, zoom, -1.0f, 1.0f);
 		m_ViewMatrix = glm::mat4(1.0f);
@@ -18,6 +20,8 @@ namespace Hazel{
 	}
 	void OrthographicCamera::RecalculateViewMatrix()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		// translate : 将坐标转化成矩阵
 		// rotate : 将角度转化成矩阵
 		// 先位移再旋转
@@ -33,6 +37,8 @@ namespace Hazel{
 	}
 	void OrthographicCamera::SetProjection(float aspectratio, float zoom)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		zoom = glm::radians(zoom);
 		m_ProjectionMatrix = glm::ortho(-aspectratio * zoom, aspectratio * zoom, -zoom, zoom, -1.0f, 1.0f);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
