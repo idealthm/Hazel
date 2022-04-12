@@ -11,7 +11,7 @@ namespace Hazel {
 		// Í¨¹ý RendererAPI ¼Ì³Ð
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void Clear() override;
-		virtual void DrawIndexed(RendererType type,const Ref<VertexArray>& vertexArray) override;
+		virtual void DrawIndexed(RendererType type,const Ref<VertexArray>& vertexArray, uint32_t indexcount = 0) override;
 	};
 
 }

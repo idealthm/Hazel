@@ -56,7 +56,7 @@ PlanetLayer::PlanetLayer()
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 	std::vector<float> verticesCircle = GetCircleVertex(0.3f, 30);
-	m_VertexBuffer.reset(Hazel::VertexBuffer::Create(verticesEarth.data(), sizeof(float)*verticesEarth.size()));
+	m_VertexBuffer = Hazel::VertexBuffer::Create(verticesEarth.data(), sizeof(float)*verticesEarth.size());
 	Hazel::BufferLayout layout = {
 		{Hazel::ShaderDataType::Float3, "a_Position"}
 	};
@@ -65,11 +65,11 @@ PlanetLayer::PlanetLayer()
 	m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 	std::vector<uint32_t> indicesEarth = GetSphereIndex(30, 30);
-	m_IndexBuffer.reset(Hazel::IndexBuffer::Create(indicesEarth.data(), (uint32_t)indicesEarth.size()));
+	m_IndexBuffer=Hazel::IndexBuffer::Create(indicesEarth.data(), (uint32_t)indicesEarth.size());
 	m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 	
 	Hazel::Ref<Hazel::VertexBuffer> BVB;
-	BVB.reset(Hazel::VertexBuffer::Create(verticesBox.data(), sizeof(float) * verticesBox.size()));
+	BVB=Hazel::VertexBuffer::Create(verticesBox.data(), sizeof(float) * verticesBox.size());
 	Hazel::BufferLayout Boxlayout = {
 		{Hazel::ShaderDataType::Float3, "a_Position"},
 		{Hazel::ShaderDataType::Float2, "a_TexCoood"}
@@ -83,12 +83,12 @@ PlanetLayer::PlanetLayer()
 	for (int i = 0; i < verticesBox.size() / 5; i++)
 		BoxIndices.push_back(i);
 	Hazel::Ref<Hazel::IndexBuffer> BIB;
-	BIB.reset(Hazel::IndexBuffer::Create(BoxIndices.data(), (uint32_t)BoxIndices.size()));
+	BIB=Hazel::IndexBuffer::Create(BoxIndices.data(), (uint32_t)BoxIndices.size());
 	m_BoxArray->SetIndexBuffer(BIB);
 
 	// -------------------Circle------------------------------------------
 	Hazel::Ref<Hazel::VertexBuffer> CVB;
-	CVB.reset(Hazel::VertexBuffer::Create(verticesCircle.data(), sizeof(float) * verticesCircle.size()));
+	CVB=Hazel::VertexBuffer::Create(verticesCircle.data(), sizeof(float) * verticesCircle.size());
 	CVB->SetLayout(layout);
 
 	m_CAO=Hazel::VertexArray::Create();
@@ -99,7 +99,7 @@ PlanetLayer::PlanetLayer()
 		CircleIndices.push_back(i);
 	CircleIndices.push_back(0);
 	Hazel::Ref<Hazel::IndexBuffer> CIB;
-	CIB.reset(Hazel::IndexBuffer::Create(CircleIndices.data(), (uint32_t)CircleIndices.size()));
+	CIB = Hazel::IndexBuffer::Create(CircleIndices.data(), (uint32_t)CircleIndices.size());
 	m_CAO->SetIndexBuffer(CIB);
 	// -------------------Circle---------------------------------------------
 

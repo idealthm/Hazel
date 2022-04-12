@@ -45,10 +45,11 @@ namespace Hazel {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(RendererType type,const Ref<VertexArray>& vertexArray)
+	void OpenGLRendererAPI::DrawIndexed(RendererType type,const Ref<VertexArray>& vertexArray, uint32_t indexcount)
 	{
 		vertexArray->Bind();
-		glDrawElements(GetOpenGLType(type), vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		uint32_t count = indexcount ? indexcount : vertexArray->GetIndexBuffer()->GetCount();
+		glDrawElements(GetOpenGLType(type), count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
