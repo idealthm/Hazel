@@ -44,8 +44,8 @@ namespace Hazel {
 
 		Renderer::Init();
 
-		//m_ImGuiLayer = new ImGuiLayer();
-		//PushOverlay(m_ImGuiLayer);
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 
 
 	}
@@ -106,18 +106,23 @@ namespace Hazel {
 			}
 			
 			//
-			/*
-				HZ_PROFILE_SCOPE("ImGuiLayerStack OnUpdate");
-				m_ImGuiLayer->Begin();
-				for (Layer* layer : m_LayerStack)
-					layer->OnImGuiRender();
-				m_ImGuiLayer->End();
-			*/
+			
+			HZ_PROFILE_SCOPE("ImGuiLayerStack OnUpdate");
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();	
+			
 
 			m_Window->OnUpdate();
 		}
 	}
 		
+	void Application::Close ()
+	{
+		m_Runing = false;
+	}
+
 	bool Application::OnWindowCloseEvent(WindowCloseEvent& e) 
 	{
 		HZ_PROFILE_FUNCTION();
@@ -143,10 +148,10 @@ namespace Hazel {
 	bool Application::OnKeyPressedEvent(KeyPressedEvent& e)
 	{
 		HZ_PROFILE_FUNCTION();
-
+		m_MouseEnabled ^= true;
 		if (Input::IsKeyPressed(GLFW_KEY_ESCAPE)) 
 		{
-			m_Runing = false;
+			Renderer::SetCursorDisabled(m_MouseEnabled);
 			return true;
 		}
 		return false;

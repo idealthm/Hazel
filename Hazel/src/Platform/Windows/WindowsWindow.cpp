@@ -188,7 +188,7 @@ namespace Hazel {
 	{
 		HZ_PROFILE_FUNCTION();
 
-		glfwSwapInterval(enabled?1:0);
+		glfwSwapInterval(enabled ? 1 : 0);
 		m_Data.VSync = enabled;
 	}
 

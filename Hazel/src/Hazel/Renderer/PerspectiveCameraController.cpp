@@ -24,9 +24,9 @@ namespace Hazel
         if (Input::IsKeyPressed(HZ_KEY_D))
             m_CameraPosition += m_Camera.GetRight() * velocity;
         if (Input::IsKeyPressed(HZ_KEY_LEFT_SHIFT))
-            m_CameraPosition -= m_Camera.GetUp() * velocity;
-        if (Input::IsKeyPressed(HZ_KEY_SPACE))
             m_CameraPosition += m_Camera.GetUp() * velocity;
+        if (Input::IsKeyPressed(HZ_KEY_SPACE))
+            m_CameraPosition -= m_Camera.GetUp() * velocity;
         
         m_Camera.SetPosition(m_CameraPosition);
     }

@@ -1,6 +1,6 @@
 #pragma once
 #include "Hazel/Core/layerStack.h"
-#include "Hazel/Core/Core.h"
+#include "Hazel/Core/Base.h"
 #include "Hazel/Events/Event.h"
 #include "Window.h"
 
@@ -24,6 +24,7 @@ namespace Hazel {
 		virtual ~Application();
 		
 		void Run();
+		void Close();
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
@@ -39,10 +40,10 @@ namespace Hazel {
 		bool OnKeyPressedEvent(KeyPressedEvent& e);
 	private:
 		std::unique_ptr<Window> m_Window;
-		//ImGuiLayer* m_ImGuiLayer;
+		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		float m_LastFrameTime = 0.0f;
-
+		bool m_MouseEnabled = true;
 		static Application* s_Instance;
 	};
 

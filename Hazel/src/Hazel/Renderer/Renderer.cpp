@@ -21,6 +21,11 @@ namespace Hazel {
 		RenderCommand::SetViewport(0, 0, width, height);
 	}
 
+	void Renderer::SetCursorDisabled(bool enabled)
+	{
+		RenderCommand::SetCursorDisabled(enabled);
+	}
+
 	void Renderer::BeginScene(const OrthographicCamera& camera)
 	{
 		m_SceneData->Projection = camera.GetProjectionMatrix();

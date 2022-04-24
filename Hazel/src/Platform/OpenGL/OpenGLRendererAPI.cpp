@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include "GLFW/glfw3.h"
+#include "Hazel/Core/Application.h"
 
 namespace Hazel {
 	GLenum GetOpenGLType(Hazel::RendererType type)
@@ -40,6 +41,11 @@ namespace Hazel {
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
+	void OpenGLRendererAPI::SetCursorDisabled(bool enabled)
+	{
+		glfwSetInputMode((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_CURSOR, enabled ? GLFW_CURSOR_NORMAL:GLFW_CURSOR_DISABLED);
+	}
+
 	void OpenGLRendererAPI::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,4 +58,5 @@ namespace Hazel {
 		glDrawElements(GetOpenGLType(type), count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	
 }
